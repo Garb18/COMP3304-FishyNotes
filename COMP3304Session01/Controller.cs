@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +7,13 @@ using System.Windows.Forms;
 
 namespace COMP3304Session01
 {
-    public partial class Form1 : Form
+    class Controller
     {
-        public Form1()
+        private IList<Form> noteList = new List<Form>();
+
+        public Controller()
         {
-            InitializeComponent();
+            Application.Run(new FishyNotes(noteList));
         }
     }
 }
