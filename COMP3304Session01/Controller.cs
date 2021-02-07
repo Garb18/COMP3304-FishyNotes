@@ -9,11 +9,13 @@ namespace COMP3304Session01
 {
     class Controller
     {
-        private IList<Form> noteList = new List<Form>();
+        private IDictionary<int, Form> _noteForms = new Dictionary<int,Form>();
+
+        private IDictionary<int, string> _noteText = new Dictionary<int, string>();
 
         public Controller()
         {
-            Application.Run(new FishyNotes(noteList));
+            Application.Run(new FishyNotes(_noteForms, _noteText));
         }
     }
 }

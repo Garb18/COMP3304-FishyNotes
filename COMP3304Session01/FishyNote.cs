@@ -12,12 +12,24 @@ namespace COMP3304Session01
 {
     public partial class FishyNote : Form
     {
-        private bool shrunk = false;
+        private bool _shrunk = false;
 
-        public FishyNote()
+        private Action<int> _closeNote;
+
+        private Action<int, string> _saveNoteContent;
+
+        private int _noteKey;
+
+        public FishyNote(int pNoteKey, Action<int> pCloseNote, Action<int, string> pSaveNoteContent)
         {
             //Instantiate the form
             InitializeComponent();
+
+            _closeNote = pCloseNote;
+
+            _saveNoteContent = pSaveNoteContent;
+
+            _noteKey = pNoteKey;
         }
 
         private void NoteInput_TextChanged(object sender, EventArgs e)
@@ -28,24 +40,30 @@ namespace COMP3304Session01
         //Closes instantce of the form
         private void ExitButton_Click(object sender, EventArgs e)
         {
+            //Save content to dictionary before note is closed
+            _saveNoteContent.Invoke(this._noteKey, this.NoteInput.Text);
+            //Remove instance from Dictionary
+            _closeNote.Invoke(this._noteKey);
+            //Closes window
             this.Dispose();
         }
+
         private void NoteInput_Click(object sender, EventArgs e)
         {
-            Text = "";
+            Text = "";  
         }
 
         private void ToggleShrink_Click(object sender, EventArgs e)
         {
-            if (!shrunk)
+            if (!_shrunk)
             {
                 Size = new Size(800, 90);
-                shrunk = true;
+                _shrunk = true;
             }
             else
             {
                 Size = new Size(800, 450);
-                shrunk = false;
+                _shrunk = false;
             }
         }
 
@@ -91,5 +109,4 @@ namespace COMP3304Session01
         }
         #endregion
     }
-
 }
