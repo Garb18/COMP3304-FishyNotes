@@ -18,18 +18,26 @@ namespace COMP3304Session01
 
         private Action<int, string> _saveNoteContent;
 
+        private Func<int, string> _retrieveNoteContent;
+
         private int _noteKey;
 
-        public FishyNote(int pNoteKey, Action<int> pCloseNote, Action<int, string> pSaveNoteContent)
+        public FishyNote(int pNoteKey, Action<int> pCloseNote, Action<int, string> pSaveNoteContent, Func<int, string> pRetrieveNoteContent)
         {
-            //Instantiate the form
+            //Instantiate the form.
             InitializeComponent();
+            
+            //SET the id of this instance of the note.
+            _noteKey = pNoteKey;
 
+            //ASSIGN action to remove this instance of the note from the Dictionary it is stored inside of.
             _closeNote = pCloseNote;
 
+            //ASSIGN action to save the contents written inside the note to a Dictonary.
             _saveNoteContent = pSaveNoteContent;
 
-            _noteKey = pNoteKey;
+            //ASSIGN action to retrieve any saved content from a note from the Dictionary it is stored in.
+            _retrieveNoteContent = pRetrieveNoteContent;
         }
 
         private void NoteInput_TextChanged(object sender, EventArgs e)

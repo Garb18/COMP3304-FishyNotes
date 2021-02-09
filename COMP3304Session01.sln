@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COMP3304Session01", "COMP3304Session01\COMP3304Session01.csproj", "{06EB3403-1A56-4D02-A5EF-A85ABAF13379}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COMP3304_Worksheets", "COMP3304Session01\COMP3304_Worksheets.csproj", "{06EB3403-1A56-4D02-A5EF-A85ABAF13379}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -32,6 +32,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -59,6 +63,9 @@
     <Compile Include="FishyNotes.Designer.cs">
       <DependentUpon>FishyNotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\INotes.cs" />
+    <Compile Include="Interfaces\INoteText.cs" />
+    <Compile Include="NoteData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FishyNote.resx">
@@ -89,5 +96,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

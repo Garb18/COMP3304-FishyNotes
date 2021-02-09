@@ -18,17 +18,20 @@ namespace COMP3304Session01
         //DECLARE dictionary to hold reference to text typed into form
         private IDictionary<int, string> _noteText;
 
-        private int noteKey = 0;
+        private int _nextNoteKey = 0;
 
         private Action<int> _RemoveFromIndex;
 
         private Action<int, string> _saveNoteContents;
+
+        private Func<int, string> _retrieveNoteContents;
 
 
         public FishyNotes(IDictionary<int, Form> pNoteForms, IDictionary<int, string> pNoteText)
         {
             InitializeComponent();
 
+            //Assigned passed paramater dictionaries
             _noteForms = pNoteForms;
             _noteText = pNoteText;
 
@@ -36,8 +39,12 @@ namespace COMP3304Session01
             _RemoveFromIndex = (int noteID) => { _noteForms.Remove(noteID); };
 
             //Action to store string contents on note on close
-            _saveNoteContents = (int noteID, string noteText) => {
-                _noteText.Add(noteID, noteText);
+            _saveNoteContents = (int noteID, string noteText) => { _noteText.Add(noteID, noteText); };
+
+            //Action to store retrival of text data
+            _retrieveNoteContents = (int noteID) => {
+                string noteText = _noteText[noteID];    
+                return noteText;            
             };
         }
 
@@ -49,14 +56,17 @@ namespace COMP3304Session01
         //Opens a new form to create a note
         private void AddNote_Click(object sender, EventArgs e)
         {
-            _noteForms.Add(noteKey, new FishyNote(noteKey, _RemoveFromIndex, _saveNoteContents));
+            //Add new Fishynote instance reference to the dictionary
+            _noteForms.Add(_nextNoteKey, new FishyNote(_nextNoteKey, _RemoveFromIndex, _saveNoteContents, _retrieveNoteContents));
 
+            //Itterate over dictionary and display note
             foreach(FishyNote fNote in _noteForms.Values) 
             {
                 fNote.Show();
             }
 
-            noteKey++;
+            //Increment note key
+            _nextNoteKey++;
         }
     }
 }
