@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using COMP3304Session01.Interfaces;
 
 namespace COMP3304Session01
 {
@@ -18,6 +19,8 @@ namespace COMP3304Session01
         //DECLARE dictionary to hold reference to text typed into form
         private IDictionary<int, string> _noteText;
 
+        private IFactory<Form> _formFactory;
+
         private int _nextNoteKey = 0;
 
         private Action<int> _RemoveFromIndex;
@@ -27,11 +30,12 @@ namespace COMP3304Session01
         private Func<int, string> _retrieveNoteContents;
 
 
-        public FishyNotes(IDictionary<int, Form> pNoteForms, IDictionary<int, string> pNoteText)
+        public FishyNotes(IFactory<Form> pFormFactory, IDictionary<int, Form> pNoteForms, IDictionary<int, string> pNoteText)
         {
             InitializeComponent();
 
             //Assigned passed paramater dictionaries
+            _formFactory = pFormFactory;
             _noteForms = pNoteForms;
             _noteText = pNoteText;
 
@@ -49,20 +53,21 @@ namespace COMP3304Session01
         }
 
         private void FishyNotes_Load(object sender, EventArgs e)
-        {
-
-        }
+        {        }
 
         //Opens a new form to create a note
         private void AddNote_Click(object sender, EventArgs e)
         {
             //Add new Fishynote instance reference to the dictionary
             _noteForms.Add(_nextNoteKey, new FishyNote(_nextNoteKey, _RemoveFromIndex, _saveNoteContents, _retrieveNoteContents));
+             
+            //_noteForms.Add(_nextNoteKey, _formFactory.Create<Form>() as FishyNote);
 
             //Itterate over dictionary and display note
             foreach(FishyNote fNote in _noteForms.Values) 
             {
                 fNote.Show();
+                //fNote.init(_nextNoteKey, _RemoveFromIndex, _saveNoteContents, _retrieveNoteContents);
             }
 
             //Increment note key

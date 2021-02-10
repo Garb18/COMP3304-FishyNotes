@@ -26,7 +26,7 @@ namespace COMP3304Session01
         {
             //Instantiate the form.
             InitializeComponent();
-            
+
             //SET the id of this instance of the note.
             _noteKey = pNoteKey;
 
@@ -39,7 +39,6 @@ namespace COMP3304Session01
             //ASSIGN action to retrieve any saved content from a note from the Dictionary it is stored in.
             _retrieveNoteContent = pRetrieveNoteContent;
         }
-
         private void NoteInput_TextChanged(object sender, EventArgs e)
         {
 
